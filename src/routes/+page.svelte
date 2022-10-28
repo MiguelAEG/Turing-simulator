@@ -1,2 +1,14 @@
-<h1>Welcome to SvelteKit</h1>
-<p>Visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to read the documentation</p>
+<script lang="ts">
+    import { onMount } from "svelte";
+
+    import Charbox from "$lib/Charbox.svelte";
+
+    const blank = "ƀ";
+    const positionOffset = 5;
+    type Direction = "L" | "R";
+
+    let string = "jdfosjkfguf";
+    let position = 0;
+</script>
+
+<h1>sdfiojfosdjifod</h1>
