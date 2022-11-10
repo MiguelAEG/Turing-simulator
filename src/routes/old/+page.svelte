@@ -59,12 +59,26 @@
     </div>
 </section>
 
+<div class="center">
 <button on:click={() => move("R")}>Mover a la derecha</button>
 <button on:click={() => move("L")}>Mover a la izquierda</button>
+</div>
 
 <style>
+
+    h1{
+        text-align: center;
+        color: #FFFFFF;
+        font-size: 50px;
+        padding: 5px;
+        margin: 3%;
+        
+    }
+    .center{
+        text-align: center;
+    }
     .current {
-        background-color: rgb(255, 199, 166);
+        background-color: rgb(90, 225, 232);
     }
     .hidden {
         display: none;
@@ -78,6 +92,9 @@
         overflow: hidden;
     }
     .strip_string {
+         border: 3px solid;
+        border-color: cyan;
+        background: white;
         display: grid;
         grid-template-columns: repeat(11, 66px);
         grid-template-rows: 66px;

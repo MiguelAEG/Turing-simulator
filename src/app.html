@@ -1,15 +1,52 @@
 <!DOCTYPE html>
-<html lang="es">
-
-<head>
-	<meta charset="utf-8" />
-	<link rel="icon" href="%sveltekit.assets%/favicon.png" />
-	<meta name="viewport" content="width=device-width" />
-	%sveltekit.head%
-</head>
-
-<body>
-	<div>%sveltekit.body%</div>
-</body>
-
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" href="%sveltekit.assets%/favicon.png" />
+		<meta name="viewport" content="width=device-width" />
+		%sveltekit.head%
+	</head>
+	<body>
+		<div>%sveltekit.body%</div>
+	</body>
 </html>
+
+<style>
+	body {
+		 background:
+        linear-gradient(
+          rgba(0, 0, 0, 0.5), 
+          rgba(0, 0, 0, 0.5)
+        ),
+        url(https://images.newscientist.com/wp-content/uploads/2016/06/29180000/crmt0d.jpg);
+    margin: auto;
+	}
+button {
+  background-color: #491991;
+  border-radius: 8px;
+  display: inline-block;
+  border-style: none;
+  box-sizing: border-box;
+  color: white;
+  cursor: pointer;
+  font-size: 14px;
+  height: 40px;
+  list-style: none;
+  margin:  10px;
+  padding: 12px 16px;
+  position: relative;
+  text-align: center;
+  text-decoration: none;
+  transition: color 100ms;
+  vertical-align: baseline;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  align-items: center;
+}
+button:hover
+ {
+  background-color: #8a60df;
+}
+
+</style>
