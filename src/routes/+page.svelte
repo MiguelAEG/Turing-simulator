@@ -1,26 +1,54 @@
 <script lang="ts">
     import { fly } from "svelte/transition";
-
     import Charbox from "$lib/Charbox.svelte";
+    import {
+        TuringMachine,
+        type Rule,
+        type Direction,
+        type State,
+    } from "$lib/TuringMachine";
+
+    import storedRules from "$lib/rules.json";
 
     const blank = "ƀ";
     const positionOffset = 6;
-    type Direction = "L" | "R";
 
-    let string = "jdfosjkfghtrtrhrthrthruf";
+    const rules: Rule[] = storedRules.map((rule) => {
+        return {
+            currentState: rule.currentState as State,
+            currentChar:
+                rule.currentChar === "BLANK" ? blank : rule.currentChar,
+            newState: rule.newState as State,
+            newChar: rule.newChar === "BLANK" ? blank : rule.newChar,
+            move: rule.move as Direction,
+        };
+    });
+
+    let rawString = "abababba";
+    let string =
+        blank + rawString.padEnd(rawString.length + positionOffset, blank);
+    $: {
+        string =
+            blank + rawString.padEnd(rawString.length + positionOffset, blank);
+        reset();
+    }
     let position = 0;
     let directionSign: number;
+    let accepted = false;
+    let state = "q0";
+    let stopped = false;
+    let active = -1;
 
     let modifiedString = string;
     let padded = 0;
 
-    $: if (position > string.length - positionOffset - 1) {
-        modifiedString = string.padEnd(positionOffset + position + 1, blank);
-    } else if (position < positionOffset) {
-        padded = positionOffset - position;
-        modifiedString = string.padStart(string.length + padded, blank);
-    } else {
-        modifiedString = string;
+    $: {
+        if (position < positionOffset) {
+            padded = positionOffset - position;
+            modifiedString = string.padStart(string.length + padded, blank);
+        } else {
+            modifiedString = string;
+        }
     }
 
     function move(direction: Direction) {
@@ -33,14 +61,72 @@
             position++;
         }
     }
-    console.log(
-        +getComputedStyle(document.documentElement)
-            .getPropertyValue("--charbox-size")
-            .slice(0, -2)
-    );
+
+    function step() {
+        const ret = turingMachine.step();
+        move(ret[0]);
+        accepted = turingMachine.accept();
+        state = ret[1];
+        string = ret[2];
+        active = ret[3];
+        stopped = ret[0] === "S";
+    }
+
+    let turingMachine = new TuringMachine(rules, "q9", string, "PIA");
+
+    let intervalSeconds = 0.43;
+    let hyperSpeed = false;
+
+    $: if (hyperSpeed) {
+        intervalSeconds = 0.91;
+    } else if (intervalSeconds > 0.85) {
+        intervalSeconds = 0.43;
+    }
+    let paused = true;
+
+    let interval: NodeJS.Timer;
+    function toggle() {
+        if (stopped) {
+            reset();
+            return;
+        }
+        paused = !paused;
+        if (paused) {
+            clearInterval(interval);
+        }
+    }
+
+    $: if (!paused) {
+        clearInterval(interval);
+        interval = setInterval(
+            step,
+            (1.5 * (0.91 - intervalSeconds)) ** 2.4 * 1000
+        );
+
+        if (accepted || stopped) {
+            clearInterval(interval);
+            paused = true;
+        }
+    }
+
+    function reset() {
+        string =
+            blank + rawString.padEnd(rawString.length + positionOffset, blank);
+        position = 0;
+        directionSign = 1;
+        accepted = false;
+        state = "q0";
+        stopped = false;
+        turingMachine = new TuringMachine(rules, "q9", string, "PIA");
+        paused = true;
+        active = -1;
+        clearInterval(interval);
+    }
 </script>
 
 <h1>Maquina de Turing</h1>
+<h2>{stopped ? (accepted ? "Aceptado" : "Rechazado") : ""}</h2>
+<h2>{state}</h2>
 
 <section id="strip-flex">
     <div id="strip">
@@ -70,8 +156,37 @@
 </section>
 
 <div class="center">
-    <button on:click={() => move("R")}>Mover a la derecha</button>
-    <button on:click={() => move("L")}>Mover a la izquierda</button>
+    <button on:click={toggle}>Iniciar / Parar</button>
+    <button on:click={() => reset()}>Reiniciar</button>
+    <label for="velocidad">Velocidad:</label>
+    <input
+        disabled={hyperSpeed}
+        type="range"
+        id="velocidad"
+        min="0.01"
+        max="0.85"
+        step="0.03"
+        bind:value={intervalSeconds}
+    />
+    <label for="hipervelocidad">Hipervelocidad?</label>
+    <input type="checkbox" id="hipervelocidad" bind:checked={hyperSpeed} />
+</div>
+
+<div class="center">
+    <label for="string">Cadena:</label>
+    <input type="text" id="string" bind:value={rawString} />
+</div>
+
+<div>
+    <h3>Reglas</h3>
+    <ol id="rules-list">
+        {#each rules as rule, i}
+            <li class:active={active === i && !stopped}>
+                δ({rule.currentState}, {rule.currentChar}) = ({rule.newState}, {rule.newChar},
+                {rule.move})
+            </li>
+        {/each}
+    </ol>
 </div>
 
 <style>
@@ -86,6 +201,9 @@
     .hidden {
         display: none;
     }
+    .active {
+        color: lawngreen;
+    }
     .center {
         text-align: center;
     }
@@ -99,7 +217,7 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        margin-bottom: 2em;
+        margin-bottom: 0.5em;
         height: 80px;
         max-width: 710px;
         overflow: hidden;
@@ -112,12 +230,39 @@
         grid-template-rows: var(--charbox-size);
         align-items: center;
     }
+
+    #rules-list {
+        display: flex;
+        align-items: center;
+        flex-flow: wrap column;
+        max-height: 200px;
+        font-weight: bold;
+        font-size: large;
+    }
+    li {
+        color: white;
+    }
+    label {
+        margin: 0 1em;
+        color: white;
+        font-size: 1.2em;
+    }
     h1 {
         text-align: center;
         color: #ffffff;
         font-size: 50px;
         padding: 5px;
         margin: 3%;
+    }
+    h2 {
+        text-align: center;
+        color: #ffffff;
+        font-size: 20px;
+    }
+    h3 {
+        text-align: center;
+        color: rgb(0, 234, 255);
+        font-size: 18px;
     }
     .current {
         background-color: rgb(90, 225, 232);
@@ -153,6 +298,17 @@
         }
         #strip {
             max-width: 613px;
+        }
+    }
+
+    @media screen and (max-width: 600px) {
+        #rules-list {
+            max-height: 250px;
+        }
+    }
+    @media screen and (max-width: 400px) {
+        #rules-list {
+            max-height: initial;
         }
     }
 </style>
