@@ -37,52 +37,99 @@
 
 <h1>Maquina de Turing</h1>
 
-<section class="strip">
-    <div class="strip_string">
-        {#each modifiedString as char, i}
-            {#key position}
-                <div
-                    class:hidden={i < position - positionOffset ||
-                        i > position + positionOffset + padded}
-                    class:current={i - padded === position ? true : false}
-                    in:fly={{
-                        x: 66 * directionSign,
-                        y: 0,
-                        duration: 500,
-                        opacity: 1,
-                    }}
-                >
-                    <Charbox {char} />
-                </div>
-            {/key}
-        {/each}
+<section id="strip-flex">
+    <div id="strip">
+        <div id="strip-string">
+            {#each modifiedString as char, i}
+                {#key position}
+                    <div
+                        class:hidden={i < position - positionOffset ||
+                            i > position + positionOffset + padded}
+                        class:current={i - padded === position ? true : false}
+                        in:fly={{
+                            x: 66 * directionSign,
+                            y: 0,
+                            duration: 500,
+                            opacity: 1,
+                        }}
+                    >
+                        <Charbox {char} />
+                    </div>
+                {/key}
+            {/each}
+        </div>
     </div>
 </section>
 
-<form action="" />
-
-<button on:click={() => move("R")}>Mover a la derecha</button>
-<button on:click={() => move("L")}>Mover a la izquierda</button>
+<div class="center">
+    <button on:click={() => move("R")}>Mover a la derecha</button>
+    <button on:click={() => move("L")}>Mover a la izquierda</button>
+</div>
 
 <style>
-    .current {
-        background-color: rgb(255, 199, 166);
+    :global(body) {
+        background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+            url(https://images.newscientist.com/wp-content/uploads/2016/06/29180000/crmt0d.jpg);
+        margin: auto;
     }
     .hidden {
         display: none;
     }
-    .strip {
+    .center {
+        text-align: center;
+    }
+    #strip-flex {
         display: flex;
         justify-content: center;
+        max-width: 100%;
+        padding: 0 2em;
+    }
+    #strip {
+        display: flex;
         align-items: center;
+        justify-content: center;
         margin-bottom: 2em;
         height: 80px;
+        max-width: 710px;
         overflow: hidden;
-        max-width: 660px;
     }
-    .strip_string {
+    #strip-string {
+        border: 3px solid;
+        background: white;
         display: grid;
         grid-template-columns: repeat(13, 66px);
         grid-template-rows: 66px;
+        align-items: center;
+    }
+    h1 {
+        text-align: center;
+        color: #ffffff;
+        font-size: 50px;
+        padding: 5px;
+        margin: 3%;
+    }
+    .current {
+        background-color: rgb(90, 225, 232);
+    }
+    .hidden {
+        display: none;
+    }
+    button {
+        background-color: #0844a5;
+        border-radius: 8px;
+        border-style: none;
+        color: white;
+        cursor: pointer;
+        font-size: 14px;
+        height: 40px;
+        margin: 10px;
+        padding: 12px 16px;
+        text-align: center;
+        transition: color 100ms;
+        touch-action: manipulation;
+        align-items: center;
+    }
+    button:hover {
+        background-color: #6294d6;
     }
 </style>
