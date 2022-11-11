@@ -1,0 +1,177 @@
+[
+    {
+        "currentState": "q0",
+        "currentChar": "BLANK",
+        "newState": "q1",
+        "newChar": "BLANK",
+        "move": "R"
+    },
+    {
+        "currentState": "q1",
+        "currentChar": "a",
+        "newState": "q2",
+        "newChar": "a",
+        "move": "R"
+    },
+    {
+        "currentState": "q1",
+        "currentChar": "b",
+        "newState": "q2",
+        "newChar": "b",
+        "move": "R"
+    },
+    {
+        "currentState": "q2",
+        "currentChar": "a",
+        "newState": "q1",
+        "newChar": "X",
+        "move": "R"
+    },
+    {
+        "currentState": "q2",
+        "currentChar": "b",
+        "newState": "q1",
+        "newChar": "X",
+        "move": "R"
+    },
+    {
+        "currentState": "q1",
+        "currentChar": "BLANK",
+        "newState": "q3",
+        "newChar": "BLANK",
+        "move": "L"
+    },
+    {
+        "currentState": "q3",
+        "currentChar": "X",
+        "newState": "q4",
+        "newChar": "X",
+        "move": "L"
+    },
+    {
+        "currentState": "q4",
+        "currentChar": "a",
+        "newState": "q4",
+        "newChar": "a",
+        "move": "L"
+    },
+    {
+        "currentState": "q4",
+        "currentChar": "b",
+        "newState": "q4",
+        "newChar": "b",
+        "move": "L"
+    },
+    {
+        "currentState": "q4",
+        "currentChar": "X",
+        "newState": "q5",
+        "newChar": "X",
+        "move": "L"
+    },
+    {
+        "currentState": "q4",
+        "currentChar": "BLANK",
+        "newState": "q8",
+        "newChar": "BLANK",
+        "move": "R"
+    },
+    {
+        "currentState": "q5",
+        "currentChar": "a",
+        "newState": "q5",
+        "newChar": "a",
+        "move": "L"
+    },
+    {
+        "currentState": "q5",
+        "currentChar": "b",
+        "newState": "q5",
+        "newChar": "b",
+        "move": "L"
+    },
+    {
+        "currentState": "q5",
+        "currentChar": "X",
+        "newState": "q5",
+        "newChar": "X",
+        "move": "L"
+    },
+    {
+        "currentState": "q5",
+        "currentChar": "BLANK",
+        "newState": "q6",
+        "newChar": "BLANK",
+        "move": "R"
+    },
+    {
+        "currentState": "q6",
+        "currentChar": "a",
+        "newState": "q6",
+        "newChar": "a",
+        "move": "R"
+    },
+    {
+        "currentState": "q6",
+        "currentChar": "b",
+        "newState": "q6",
+        "newChar": "b",
+        "move": "R"
+    },
+    {
+        "currentState": "q6",
+        "currentChar": "X",
+        "newState": "q7",
+        "newChar": "a",
+        "move": "R"
+    },
+    {
+        "currentState": "q7",
+        "currentChar": "a",
+        "newState": "q7",
+        "newChar": "a",
+        "move": "R"
+    },
+    {
+        "currentState": "q7",
+        "currentChar": "b",
+        "newState": "q7",
+        "newChar": "b",
+        "move": "R"
+    },
+    {
+        "currentState": "q7",
+        "currentChar": "X",
+        "newState": "q6",
+        "newChar": "X",
+        "move": "R"
+    },
+    {
+        "currentState": "q6",
+        "currentChar": "BLANK",
+        "newState": "q3",
+        "newChar": "BLANK",
+        "move": "L"
+    },
+    {
+        "currentState": "q8",
+        "currentChar": "a",
+        "newState": "q8",
+        "newChar": "BLANK",
+        "move": "R"
+    },
+    {
+        "currentState": "q8",
+        "currentChar": "b",
+        "newState": "q8",
+        "newChar": "BLANK",
+        "move": "R"
+    },
+    {
+        "currentState": "q8",
+        "currentChar": "X",
+        "newState": "q9",
+        "newChar": "BLANK",
+        "move": "S"
+    }
+]
