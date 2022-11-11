@@ -8,8 +8,8 @@
 
 <style>
     div {
-        width: 100%;
-        height: 100%;
+        width: 66px;
+        height: 66px;
         display: flex;
         justify-content: center;
         align-items: center;
