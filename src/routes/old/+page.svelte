@@ -66,6 +66,16 @@
 
 <style>
 
+ :global(body) {
+		 background:
+        linear-gradient(
+          rgba(0, 0, 0, 0.5), 
+          rgba(0, 0, 0, 0.5)
+        ),
+        url(https://images.newscientist.com/wp-content/uploads/2016/06/29180000/crmt0d.jpg);
+    margin: auto;
+	}
+
     h1{
         text-align: center;
         color: #FFFFFF;
@@ -102,17 +112,9 @@
 
     }
 
-    body {
-		 background:
-        linear-gradient(
-          rgba(0, 0, 0, 0.5), 
-          rgba(0, 0, 0, 0.5)
-        ),
-        url(https://images.newscientist.com/wp-content/uploads/2016/06/29180000/crmt0d.jpg);
-    margin: auto;
-	}
+   
 button {
-  background-color: #491991;
+  background-color: #0844a5;
   border-radius: 8px;
   display: inline-block;
   border-style: none;
@@ -136,7 +138,7 @@ button {
 }
 button:hover
  {
-  background-color: #8a60df;
+  background-color: #6294d6;
 }
 
 </style>
