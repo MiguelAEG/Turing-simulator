@@ -33,6 +33,11 @@
             position++;
         }
     }
+    console.log(
+        +getComputedStyle(document.documentElement)
+            .getPropertyValue("--charbox-size")
+            .slice(0, -2)
+    );
 </script>
 
 <h1>Maquina de Turing</h1>
@@ -47,7 +52,10 @@
                             i > position + positionOffset + padded}
                         class:current={i - padded === position ? true : false}
                         in:fly={{
-                            x: 66 * directionSign,
+                            x:
+                                +getComputedStyle(document.documentElement)
+                                    .getPropertyValue("--charbox-size")
+                                    .slice(0, -2) * directionSign,
                             y: 0,
                             duration: 500,
                             opacity: 1,
@@ -67,6 +75,9 @@
 </div>
 
 <style>
+    :root {
+        --charbox-size: 66px;
+    }
     :global(body) {
         background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
             url(https://images.newscientist.com/wp-content/uploads/2016/06/29180000/crmt0d.jpg);
@@ -97,8 +108,8 @@
         border: 3px solid;
         background: white;
         display: grid;
-        grid-template-columns: repeat(13, 66px);
-        grid-template-rows: 66px;
+        grid-template-columns: repeat(13, var(--charbox-size));
+        grid-template-rows: var(--charbox-size);
         align-items: center;
     }
     h1 {
@@ -131,5 +142,17 @@
     }
     button:hover {
         background-color: #6294d6;
+    }
+
+    @media screen and (max-width: 768px) {
+        :root {
+            --charbox-size: 57px;
+        }
+        #strip-flex {
+            padding: 0 1em;
+        }
+        #strip {
+            max-width: 613px;
+        }
     }
 </style>
