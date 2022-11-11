@@ -194,15 +194,17 @@
         --charbox-size: 66px;
     }
     :global(body) {
-        background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+        background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
             url(https://images.newscientist.com/wp-content/uploads/2016/06/29180000/crmt0d.jpg);
         margin: auto;
+        background-size: cover;
     }
     .hidden {
         display: none;
     }
     .active {
-        color: lawngreen;
+        background-color: rgb(25, 143, 19);
+        color: white;
     }
     .center {
         text-align: center;
@@ -232,40 +234,62 @@
     }
 
     #rules-list {
+        margin-top: 40px;
         display: flex;
         align-items: center;
         flex-flow: wrap column;
         max-height: 200px;
         font-weight: bold;
         font-size: large;
+        color: white;
+    }
+    #string{
+        width: 200px;
+        height: 30px;
+        font-size: 20px;
+        border-radius: 5px;
+        
     }
     li {
+        background: rgba(179, 16, 16, 0.448);
         color: white;
+        padding: 0.5em;
     }
     label {
         margin: 0 1em;
         color: white;
-        font-size: 1.2em;
+        font-size: 1.3em;
     }
     h1 {
+        color: #fff;
+  text-shadow:
+    0 0 7px #fff,
+    0 0 10px #fff,
+    0 0 21px #fff,
+    0 0 42px rgb(22, 143, 218),
+    0 0 82px rgb(22, 143, 218),
+    0 0 92px rgb(22, 143, 218),
+    0 0 102px rgb(22, 143, 218),
+    0 0 151px rgb(22, 143, 218);
         text-align: center;
         color: #ffffff;
-        font-size: 50px;
+        font-size: 55px;
         padding: 5px;
         margin: 3%;
     }
     h2 {
         text-align: center;
-        color: #ffffff;
-        font-size: 20px;
+        color: white;
+        font-size: 25px;
     }
     h3 {
+        margin-top:  35px;
         text-align: center;
-        color: rgb(0, 234, 255);
-        font-size: 18px;
+        color: rgb(166, 255, 252);
+        font-size: 25px;
     }
     .current {
-        background-color: rgb(90, 225, 232);
+        background-color: rgb(119, 237, 244);
     }
     .hidden {
         display: none;
@@ -286,7 +310,7 @@
         align-items: center;
     }
     button:hover {
-        background-color: #6294d6;
+        background-color: #02142b;
     }
 
     @media screen and (max-width: 768px) {
